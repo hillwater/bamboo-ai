@@ -17,3 +17,4 @@ export REDIS_HOST=localhost
 export REDIS_PASSWORD=
 ./bin/www
 ````
+then you can access to http://localhost:3000
