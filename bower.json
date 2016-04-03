@@ -1,0 +1,9 @@
+{
+    "name":"cloudamqp_test",
+    "dependencies": {
+        "bootstrap": "3.x.x",
+        "jquery": "~1.10.0",
+        "socket.io-client":"1.4.5",
+        "jquery-mobile-bower":"1.4.5"
+    }
+}
