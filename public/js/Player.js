@@ -156,7 +156,7 @@ AIPlayer.prototype.move = function(){
         pullOnce();
 
         function pullOnce() {
-            $.post("/compute", {
+            $.post("compute", {
                 'posList': posList, level: level, type : 0
             }).done(function( result ) {
                 if(result == null) {
