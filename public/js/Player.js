@@ -124,13 +124,13 @@ AIPlayer.prototype.move = function(){
         var level = 5;
         switch(self.mode){
             case 'novice':
-                level=5;
-                break;
-            case 'medium':
                 level=8;
                 break;
-            case 'expert':
+            case 'medium':
                 level=12;
+                break;
+            case 'expert':
+                level=14;
                 break;
             default:
                 break;
