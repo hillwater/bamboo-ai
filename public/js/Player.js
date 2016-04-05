@@ -147,7 +147,7 @@ AIPlayer.prototype.move = function(){
 
 
     function pullResult(posList, level) {
-        var maxTimeLimit = 60000;// 60 seconds
+        var maxTimeLimit = 600000;// 10 minutes
 
         var currentTime = 0;
 
