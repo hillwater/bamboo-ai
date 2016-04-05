@@ -80,7 +80,10 @@ function Game(boardElm, boardBackgroundElm){
                 board.unsetGo(last.r,last.c);
                 white.watch(last.r,last.c,'remove');
                 black.watch(last.r,last.c,'remove');
-            }while(players[last.color] instanceof AIPlayer);
+
+                // fix a bug, when AI play first, the last black chess can not be undo
+            }while((players[last.color] instanceof AIPlayer) && (this.history.length > 1));
+
 
             board.setClickable(true, last.color);
             board.winChangeBack();
@@ -103,7 +106,9 @@ function Game(boardElm, boardBackgroundElm){
             board.unsetGo(last.r,last.c);
             white.watch(last.r,last.c,'remove');
             black.watch(last.r,last.c,'remove');
-        }while(players[last.color] instanceof AIPlayer);
+
+            // fix a bug, when AI play first, the last black chess can not be undo
+        }while((players[last.color] instanceof AIPlayer) && (this.history.length > 1));
 
         if(this.history.length > 0) {
             var last = this.history[this.history.length - 1];

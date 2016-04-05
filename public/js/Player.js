@@ -91,7 +91,7 @@ AIPlayer.prototype.watch = function(r, c, color){
 AIPlayer.prototype.move = function(){
     var self = this;
 
-    if(this.game.rounds === 0){
+    if(this.game.history.length === 0){
         this.setGo(7, 7);
     }/*else if(this.game.rounds === 1){
         var moves=[
