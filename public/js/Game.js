@@ -74,11 +74,24 @@ function Game(boardElm, boardBackgroundElm){
 
     this.undo = function(){
         if(!playing){
-            if(!this.history.length)return;
-            var last = this.history.pop();
-            board.unsetGo(last.r,last.c);
-            white.watch(last.r,last.c,'remove');
-            black.watch(last.r,last.c,'remove');
+            do{
+                if(!this.history.length)return;
+                var last = this.history.pop();
+                board.unsetGo(last.r,last.c);
+                white.watch(last.r,last.c,'remove');
+                black.watch(last.r,last.c,'remove');
+            }while(players[last.color] instanceof AIPlayer);
+
+            var last = this.history[this.history.length - 1];
+            if(this.history.length > 0) board.highlight(last.r, last.c);
+            else board.unHighlight();
+
+            board.setClickable(true, last.color);
+            board.winChangeBack();
+            playing=true;
+
+            players[last.color].other.myTurn();
+
             return;
         }
         do{

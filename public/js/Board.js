@@ -180,6 +180,10 @@ var Board = function(boardElm, backgroundElm){
         }
     };
 
+    this.winChangeBack = function(){
+        $(".go-place").css("opacity", 1);
+    };
+
     this.isSet = function(r, c){
         return places[r][c].isSet;
     };

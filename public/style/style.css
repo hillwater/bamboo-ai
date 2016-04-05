@@ -440,3 +440,8 @@ table.board {
 	-o-animation-direction: alternate;
 	animation-direction: alternate;
 }
+
+
+#main-but-group {
+	z-index: 100;
+}

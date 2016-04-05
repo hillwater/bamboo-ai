@@ -51,13 +51,14 @@ $(document).ready(function(){
     });
 
     $("#undo-button").on('tap', function(){
+        $('.fullscreen-wrapper').hide();
         game.undo();
     });
     
-    $('.fullscreen-wrapper').on('tap', function(){
-        $(this).hide();
-        $.mobile.changePage('#game-won');
-    });
+    //$('.fullscreen-wrapper').on('tap', function(){
+    //    $(this).hide();
+    //    $.mobile.changePage('#game-won');
+    //});
     
     $('#new-game').page();
     $('#game-won').page();
