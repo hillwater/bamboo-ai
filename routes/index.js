@@ -51,9 +51,15 @@ router.post('/compute', function(req, res, next) {
 
   function convertStringArrayToIntArray(strArray) {
     var result = [];
-    for(var i = 0; i<strArray.length;i++) {
-      result.push(parseInt(strArray[i]));
+    // fix a bug, when only one element, the input is not an array, but just a string.
+    if(!Array.isArray(strArray)) {
+        result.push(parseInt(strArray));
+    }else {
+      for(var i = 0; i<strArray.length;i++) {
+        result.push(parseInt(strArray[i]));
+      }
     }
+
     return result;
   }
 
