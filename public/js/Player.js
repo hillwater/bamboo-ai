@@ -93,7 +93,7 @@ AIPlayer.prototype.move = function(){
 
     if(this.game.rounds === 0){
         this.setGo(7, 7);
-    }else if(this.game.rounds === 1){
+    }/*else if(this.game.rounds === 1){
         var moves=[
             [6,6],
             [6,7],
@@ -113,7 +113,7 @@ AIPlayer.prototype.move = function(){
                 moves.splice(ind,1);
             }
         }
-    }else{
+    }*/else{
         //this.worker.postMessage({
         //    type: 'compute'
         //});
