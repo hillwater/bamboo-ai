@@ -82,15 +82,18 @@ function Game(boardElm, boardBackgroundElm){
                 black.watch(last.r,last.c,'remove');
             }while(players[last.color] instanceof AIPlayer);
 
-            var last = this.history[this.history.length - 1];
-            if(this.history.length > 0) board.highlight(last.r, last.c);
-            else board.unHighlight();
-
             board.setClickable(true, last.color);
             board.winChangeBack();
             playing=true;
 
-            players[last.color].other.myTurn();
+            if(this.history.length > 0) {
+                var last = this.history[this.history.length - 1];
+                board.highlight(last.r, last.c);
+                players[last.color].other.myTurn();
+            } else {
+                board.unHighlight();
+                players.black.myTurn();
+            }
 
             return;
         }
@@ -101,10 +104,15 @@ function Game(boardElm, boardBackgroundElm){
             white.watch(last.r,last.c,'remove');
             black.watch(last.r,last.c,'remove');
         }while(players[last.color] instanceof AIPlayer);
-        var last = this.history[this.history.length - 1];
-        if(this.history.length > 0) board.highlight(last.r, last.c);
-        else board.unHighlight();
-        players[last.color].other.myTurn();
+
+        if(this.history.length > 0) {
+            var last = this.history[this.history.length - 1];
+            board.highlight(last.r, last.c);
+            players[last.color].other.myTurn();
+        } else {
+            board.unHighlight();
+            players.black.myTurn();
+        }
         for(var col in {'black':'','white':''}){
             if(players[col] instanceof AIPlayer && players[col].computing){
                 players[col].cancel++;
