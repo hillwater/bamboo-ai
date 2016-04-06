@@ -8,7 +8,6 @@ var mask = 0x5a00;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
   res.render('index');
 });
 

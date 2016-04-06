@@ -61,7 +61,7 @@ $(document).ready(function(){
     //});
     
     $('#new-game').page();
-    $('#game-won').page();
+    //$('#game-won').page();
     gameData.load();
     $('.back-to-game').button('disable');
     $.mobile.changePage('#new-game',{changeHash: false});
@@ -99,6 +99,16 @@ $(document).ready(function(){
             textObj.html(val);
         };
 
+        self.setThinkingText = function(){
+            text = $('#text-thinking').text();
+            textObj.html(text);
+        };
+
+        self.setYourTurnText = function(){
+            text = $('#text-your-turn').text();
+            textObj.html(text);
+        };
+
         self.getColor = function(){
             return color;
         };
@@ -118,21 +128,21 @@ $(document).ready(function(){
 function showWinDialog(game){
     gameInfo.setBlinking(false);
     if(game.mode === 'hvh'){
-        var who=(function(string){ return string.charAt(0).toUpperCase() + string.slice(1);})(game.getCurrentPlayer().color);
-        $("#game-won h4").html(who+' Won!');
-        gameInfo.value=who+' won.'
-        $("#win-content").html(who+' won the game. Play again?');
+        //var who=(function(string){ return string.charAt(0).toUpperCase() + string.slice(1);})(game.getCurrentPlayer().color);
+        //$("#game-won h4").html(who+' Won!');
+        //gameInfo.value=who+' won.'
+        //$("#win-content").html(who+' won the game. Play again?');
         $('#happy-outer').fadeIn(500);
     }else{
         if(game.getCurrentPlayer() instanceof HumanPlayer){
-            $("#game-won h4").html('You Won!');
-            $("#win-content").html('You won the game. Play again?');
-            gameInfo.value='You won.'
+            //$("#game-won h4").html('You Won!');
+            //$("#win-content").html('You won the game. Play again?');
+            //gameInfo.value='You won.'
             $('#happy-outer').fadeIn(500);
         }else{
-            $("#game-won h4").html('You Lost.');
-            $("#win-content").html('Meh. You lost to the computer. Play again?');
-            gameInfo.value='Computer won.'
+            //$("#game-won h4").html('You Lost.');
+            //$("#win-content").html('Meh. You lost to the computer. Play again?');
+            //gameInfo.value='Computer won.'
             $('#sad-outer').fadeIn(500);
         }
     }

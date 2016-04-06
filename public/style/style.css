@@ -445,3 +445,7 @@ table.board {
 #main-but-group {
 	z-index: 100;
 }
+
+div.hidden {
+	display: none;
+}

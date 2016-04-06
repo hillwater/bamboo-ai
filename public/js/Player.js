@@ -28,7 +28,7 @@ HumanPlayer.prototype.myTurn = function(){
     Player.prototype.myTurn.call(this);
     this.game.toHuman(this.color);
     if(this.other instanceof AIPlayer){
-        gameInfo.setText('Your turn');
+        gameInfo.setYourTurnText();
     }
 };
 
@@ -74,7 +74,7 @@ AIPlayer.prototype = new Player();
 AIPlayer.prototype.myTurn = function(){
     Player.prototype.myTurn.call(this);
     this.game.toOthers();
-    gameInfo.setText("Thinking...");
+    gameInfo.setThinkingText();
     gameInfo.setBlinking(true);
     this.move();
 };

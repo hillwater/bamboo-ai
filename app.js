@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var i18n = require('i18n');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,6 +24,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+i18n.configure({
+  locales:['en', 'zh', 'ja'],
+  defaultLocale: 'en',
+  directory: path.join(__dirname, 'locales'),
+  updateFiles: false,
+  indent: "\t",
+  extension: '.js'
+});
+
+// default: using 'accept-language' header to guess language settings
+app.use(i18n.init);
+
+// below should be before all other app.use('/url', xxx)
+app.use(function (req, res, next) {
+  res.locals.__ = res.__ = function() {
+    return i18n.__.apply(req, arguments);
+  };
+  next();
+});
+
 
 app.use('/', routes);
 app.use('/users', users);
