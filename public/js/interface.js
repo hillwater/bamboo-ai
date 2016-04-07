@@ -51,8 +51,11 @@ $(document).ready(function(){
     });
 
     $("#undo-button").on('tap', function(){
-        $('.fullscreen-wrapper').hide();
         game.undo();
+    });
+
+    $("#main-but-group").on('tap', function(){
+        $('.fullscreen-wrapper').hide();
     });
     
     //$('.fullscreen-wrapper').on('tap', function(){
