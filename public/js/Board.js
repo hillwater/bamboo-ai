@@ -12,30 +12,11 @@ function Place(r, c, board){
     inner.className = "go";
     elm.appendChild(inner);
 
-    if("ontouchstart" in window){
-        var moved = false;
-        elm.ontouchstart = function(e){
-            moved = false;
-            return false;
-        };
-
-        elm.ontouchmove = function(e){
-            moved = true;
-            return false;
-        };
-
-        elm.ontouchend = function(e){
-            if(!moved){
-                board.clicked(r, c);
-            }
-            moved = false;
-            return false;
-        };
-    }
     elm.onclick = function(){
         board.clicked(r, c);
     };
     elm = $(elm);
+
     this.elm = elm;
     this.isSet = false;
 }
@@ -108,6 +89,60 @@ var Board = function(boardElm, backgroundElm){
     });
 
     boardElm.append(frag);
+
+
+    // touch move for mobile
+    $(boardElm).on('touchmove', function(e){
+        var x = e.originalEvent.touches[0].pageX;
+        var y = e.originalEvent.touches[0].pageY;
+
+        var off = $(boardElm).offset();
+
+        var diffX = x - off.left;
+        var diffY = y - off.top;
+
+        $('.go-place').removeClass('hover');
+
+        if(diffX >=0 && diffY >=0 && diffX <= $(boardElm).width() && diffY <= $(boardElm).height()) {
+
+            var r = diffY*15/$(boardElm).height() | 0;
+            var c= diffX*15/$(boardElm).width() | 0;
+
+            places[r][c].elm.addClass('hover');
+
+        }
+
+
+        // below two line code is for fix the mobile screen, no scroll
+        e.preventDefault();
+        return false;
+    });
+
+    $(boardElm).on('touchend', function(e){
+        var x = e.originalEvent.changedTouches[0].pageX;
+        var y = e.originalEvent.changedTouches[0].pageY;
+
+        var off = $(boardElm).offset();
+
+        var diffX = x - off.left;
+        var diffY = y - off.top;
+
+        $('.go-place').removeClass('hover');
+
+        if(diffX >=0 && diffY >=0 && diffX <= $(boardElm).width() && diffY <= $(boardElm).height()) {
+
+            var r = diffY*15/$(boardElm).height() | 0;
+            var c= diffX*15/$(boardElm).width() | 0;
+
+            self.clicked(r, c);
+        }
+
+        // below two line code is for fix the mobile screen, no scroll
+        e.preventDefault();
+        return false;
+    });
+
+
     (function(){
         for (var i=0;i<2;i++){
             var tmp=[];
