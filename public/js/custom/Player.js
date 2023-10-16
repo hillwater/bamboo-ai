@@ -1,9 +1,10 @@
 // Agents that represent either a player or an AI
-function Player(color){
-    this.color = color;
+function Player(game){
+    this.game = game;
 }
 
-Player.prototype.myTurn = function(){
+Player.prototype.myTurn = function(color){
+    this.color = color;
     gameInfo.setText((function(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     })(this.color)+"'s turn.");
@@ -11,22 +12,19 @@ Player.prototype.myTurn = function(){
     gameInfo.setBlinking(false);
 };
 
-
-function HumanPlayer(color){
-    Player.call(this, color);
+function HumanPlayer(game){
+    Player.call(this, game);
 }
 
 HumanPlayer.prototype = new Player();
 
-HumanPlayer.prototype.myTurn = function(){
-    Player.prototype.myTurn.call(this);
+HumanPlayer.prototype.myTurn = function(color){
+    Player.prototype.myTurn.call(this, color);
     gameInfo.setYourTurnText();
 };
 
-function AIPlayer(color, level, posList){
-    Player.call(this, color);
-    this.level = level;
-    this.posList = posList;
+function AIPlayer(game){
+    Player.call(this, game);
     this.computing = false;
     this.cancel = 0;
     var self=this;
@@ -34,8 +32,16 @@ function AIPlayer(color, level, posList){
 
 AIPlayer.prototype = new Player();
 
-AIPlayer.prototype.myTurn = function(){
-    Player.prototype.myTurn.call(this);
+AIPlayer.prototype.setLevel = function(level){
+    this.level = level;
+};
+
+AIPlayer.prototype.setPosList = function(posList){
+    this.posList = posList;
+};
+
+AIPlayer.prototype.myTurn = function(color){
+    Player.prototype.myTurn.call(this, color);
     gameInfo.setThinkingText();
     gameInfo.setBlinking(true);
     this.move();
@@ -81,7 +87,7 @@ AIPlayer.prototype.move = function(){
                     if(self.cancel>0){
                         self.cancel--;
                     } else {
-                        self.setGo(result >> 4, result & 0xf);
+                        self.game.setGo(result >> 4, result & 0xf, self.color);
                     }
                 }
             });

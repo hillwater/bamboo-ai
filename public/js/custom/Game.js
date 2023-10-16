@@ -1,31 +1,30 @@
 function Game(boardElm, boardBackgroundElm){
-    this.history = [];
+    var self = this;
+    self.history = [];
     var playing = false,
         board = new Board(boardElm, boardBackgroundElm),
+        humanPlayer = new HumanPlayer(self),
+        aiPlayer = new AIPlayer(self),
         currentPlayer,
         currentColor = "black";
 
     board.clicked = function(r, c){
         var p = currentPlayer;
         if(p instanceof HumanPlayer){
-            setGo(r, c, currentColor);
+            self.setGo(r, c, currentColor);
         }
     };
 
-    this.update = function(r, c, color){
+    self.update = function(r, c, color){
         if(playing){
             board.updateMap(r, c, color);
-            setTimeout(progress, 0);
+            setTimeout(() => self.changeSide(), 0);
         }
     };
 
-    function progress(){
-        changeSide();
-    }
-
-    this.setGo = function(r, c, color){
+    self.setGo = function(r, c, color){
         if(!playing || board.isSet(r, c))return false;
-        this.history.push({
+        self.history.push({
             r: r,
             c: c,
             color:color
@@ -36,34 +35,34 @@ function Game(boardElm, boardBackgroundElm){
         var result = board.getGameResult(r, c, color);
 
         if(result === "draw"){
-            this.draw();
+            self.draw();
         }else if(result === "win"){
-            this.win();
+            self.win();
             board.winChange(r, c, color);
         }else{
-            this.update(r, c, color);
+            self.update(r, c, color);
         }
         return true;
     };
 
-    this.startAI = function(level) {
+    self.startAI = function(level) {
         board.setClickable(false);
 
         var posList = [];
-        for(var i = 0; i<this.history.length;i++) {
-            posList.push(this.history[i].r * 16 + this.history[i].c);
+        for(var i = 0; i<self.history.length;i++) {
+            posList.push(self.history[i].r * 16 + self.history[i].c);
         }
 
-        currentPlayer = new AIPlayer(currentColor,level, posList);
-        currentPlayer.myTurn();
-        this.changeSide();
+        currentPlayer = aiPlayer;
+        currentPlayer.setPosList(posList);
+        currentPlayer.myTurn(currentColor);
     };
 
-    this.undo = function(){
+    self.undo = function(){
         if(!playing){
             do{
-                if(!this.history.length)break;
-                var last = this.history.pop();
+                if(!self.history.length)break;
+                var last = self.history.pop();
                 board.unsetGo(last.r,last.c);
                 white.watch(last.r,last.c,'remove');
                 black.watch(last.r,last.c,'remove');
@@ -74,8 +73,8 @@ function Game(boardElm, boardBackgroundElm){
             board.winChangeBack();
             playing=true;
 
-            if(this.history.length > 0) {
-                var last = this.history[this.history.length - 1];
+            if(self.history.length > 0) {
+                var last = self.history[self.history.length - 1];
                 board.highlight(last.r, last.c);
                 players[last.color].other.myTurn();
             } else {
@@ -86,15 +85,15 @@ function Game(boardElm, boardBackgroundElm){
             return;
         }
         do{
-            if(!this.history.length)break;
-            var last = this.history.pop();
+            if(!self.history.length)break;
+            var last = self.history.pop();
             board.unsetGo(last.r,last.c);
             white.watch(last.r,last.c,'remove');
             black.watch(last.r,last.c,'remove');
         }while((players[last.color] instanceof AIPlayer));
 
-        if(this.history.length > 0) {
-            var last = this.history[this.history.length - 1];
+        if(self.history.length > 0) {
+            var last = self.history[self.history.length - 1];
             board.highlight(last.r, last.c);
             players[last.color].other.myTurn();
         } else {
@@ -108,34 +107,34 @@ function Game(boardElm, boardBackgroundElm){
         }
     };
 
-    this.draw = function(){
+    self.draw = function(){
         playing = false;
         board.setClickable(false);
     };
 
-    this.win = function(){
+    self.win = function(){
         playing = false;
         board.setClickable(false);
-        showWinDialog(this);
+        showWinDialog(self);
     };
 
-    this.init = function(){
-        this.history = [];
+    self.init = function(){
+        self.history = [];
         board.init();
         //board.setWarning(0, true);
         //board.setWarning(1, true);
     };
 
-    this.start = function(){
+    self.start = function(){
         playing = true;
-        currentPlayer = new HumanPlayer(currentColor);
-        currentPlayer.myTurn();
+        currentPlayer = humanPlayer;
+        currentPlayer.myTurn(currentColor);
         board.setClickable(true, currentColor);
     };
 
-    this.changeSide = function() {
-        currentColor = currentColor==='black'?'white':'black';
-        currentPlayer = new HumanPlayer(currentColor);
-        currentPlayer.myTurn();
+    self.changeSide = function() {
+        currentColor = (currentColor==='black')?'white':'black';
+        currentPlayer = humanPlayer;
+        currentPlayer.myTurn(currentColor);
     };
 }
