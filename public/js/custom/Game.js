@@ -46,6 +46,11 @@ function Game(boardElm, boardBackgroundElm){
     };
 
     self.startAI = function(level) {
+        // skip if in computing
+        if(aiPlayer.computing) {
+            return;
+        }
+
         board.setClickable(false);
 
         var posList = [];
