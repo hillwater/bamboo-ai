@@ -60,6 +60,7 @@ function Game(boardElm, boardBackgroundElm){
 
         currentPlayer = aiPlayer;
         currentPlayer.setPosList(posList);
+        currentPlayer.setLevel(level)
         currentPlayer.myTurn(currentColor);
     };
 
