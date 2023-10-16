@@ -37,21 +37,19 @@
 					<span class='cont'><%= __('your-turn') %></span>
 				</div>
 				<div id='main-but-group' class='game-ult'>
-					<a href='#' id='new-game' data-rel='dialog' data-role='button' data-icon="grid"><%= __('new-game') %></a>
-					<a href='#' id='go-button' data-rel='dialog' data-role='button' data-icon="arrow-r"><%= __('go') %></a>
-					<a href='#' id='undo-button' data-icon="back"  data-role='button' ><%= __('undo') %></a>
-					<select name="level" id="select-level" data-native-menu="false">
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="21">21</option>
-						<option value="22">22</option>
+					<a href='#' id='new-game' data-inline="true" data-rel='dialog' data-role='button' data-icon="grid"><%= __('new-game') %></a>
+					<a href='#' id='go-button' data-inline="true" data-rel='dialog' data-role='button' data-icon="check"><%= __('go') %></a>
+					<a href='#' id='undo-button' data-inline="true" data-icon="back"  data-role='button' ><%= __('undo') %></a>
+					<select name="level" id="select-level" data-inline="true"  data-iconpos="left">
+						<option value="12">Level 12</option>
+						<option value="13">Level 13</option>
+						<option value="14">Level 14</option>
+						<option value="15">Level 15</option>
+						<option value="16">Level 16</option>
+						<option value="17">Level 17</option>
+						<option value="18">Level 18</option>
+						<option value="19">Level 19</option>
+						<option value="20">Level 20</option>
 					</select>
 				</div>
 				<div class='go-board' data-enhance=false>

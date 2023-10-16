@@ -121,6 +121,7 @@ function Game(boardElm, boardBackgroundElm){
     self.init = function(){
         self.history = [];
         board.init();
+        currentColor = "black";
         //board.setWarning(0, true);
         //board.setWarning(1, true);
     };

@@ -11,11 +11,7 @@ $(document).ready(function(){
     
     
     $("#new-game").on('click',function(){
-        // set default level to 14
-        $("#select-level").val(14);
-
         game.init();
-        $.mobile.changePage('#game-page');
         game.start();
     });
 
@@ -32,6 +28,11 @@ $(document).ready(function(){
         $('.fullscreen-wrapper').hide();
     });
     
+    // set default level to 14
+    // $("#select-level").val("14");
+    var levelSelect = $('#select-level');
+    levelSelect[0].selectedIndex = 2;
+    levelSelect.selectmenu('refresh');
 
     window.gameInfo = (function(){
         var blinking = false,
@@ -90,6 +91,9 @@ $(document).ready(function(){
 
         return self;
     })();
+
+    game.init();
+    game.start();
 });
 
 function showWinDialog(game){

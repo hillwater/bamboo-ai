@@ -49,9 +49,9 @@ function adjustSizeGen(){
                 'width': ((2*hsize+1)*15+12)/2-150
             });
             mainButs.css({
-                'top': 6,
+                'top': 531,
                 'right': 6,
-                'width': 160
+                'width': 360
             });
         }else{
             hsize = ~~((hspace - 15) / 15 / 2);
