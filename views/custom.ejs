@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--manifest="offline.appcache"-->
+<html>
+<head>
+	<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon" href="images/icon.png"/>
+	<link rel="icon" type="image/png" href="images/icon.png" />
+	<link rel="apple-touch-startup-image" media="(min-device-width: 768px) and (orientation: portrait)" href="images/splash_iPad_portrait.png" />
+	<link rel="apple-touch-startup-image" media="(min-device-width: 768px) and (orientation: landscape)" href="images/splash_iPad_landscape.png" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title><%= __('gomoku') %></title>
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+	<link rel="stylesheet" href="style/w.min.css" />
+	<link rel='stylesheet' href='style/style.css' type='text/css'/>
+
+	<script src='js/custom/Player.js' type='text/javascript'></script>
+	<script src='js/custom/Board.js' type='text/javascript'></script>
+	<script src='js/custom/Game.js' type='text/javascript'></script>
+	<script src='js/custom/layout.js' type='text/javascript'></script>
+	<script src='js/custom/interface.js' type='text/javascript'></script>
+	<script src='js/custom/storage.js' type='text/javascript'></script>
+</head>
+<body ontouchstart="">
+	<div data-role='page' data-theme='w' id='game-page' class='no-background'>
+		<div data-role='content' class='center no-padding'>
+			<div id='game-region'>
+				<header class='game-ult'><%= __('gomoku') %></header>
+				<div id='game-info' class='game-ult ui-bar ui-bar-e'>
+					<span class='go black'></span>
+					<span class='cont'><%= __('your-turn') %></span>
+				</div>
+				<div id='main-but-group' class='game-ult'>
+					<a href='#' id='new-game' data-rel='dialog' data-role='button' data-icon="grid"><%= __('new-game') %></a>
+					<a href='#' id='go-button' data-rel='dialog' data-role='button' data-icon="arrow-r"><%= __('go') %></a>
+					<a href='#' id='undo-button' data-icon="back"  data-role='button' ><%= __('undo') %></a>
+					<select name="level" id="select-level" data-native-menu="false">
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+					</select>
+				</div>
+				<div class='go-board' data-enhance=false>
+
+				</div>
+				<table class='board' data-enhance=false>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

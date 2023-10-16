@@ -11,6 +11,11 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+/* GET custom page. */
+router.get('/custom', function(req, res, next) {
+  res.render('custom');
+});
+
 router.post('/compute', function(req, res, next) {
 
   var posList = convertStringArrayToIntArray(req.body['posList[]']);

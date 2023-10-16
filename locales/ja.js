@@ -3,6 +3,7 @@
     "your-turn": "あなたの番",
     "new-game": "新ゲーム",
     "undo": "アンドゥ",
+    "go":"行く",
     "your-color": "先後手",
     "black": "先手",
     "white": "後手",

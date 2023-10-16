@@ -3,6 +3,7 @@
     "your-turn": "轮到你了",
     "new-game": "新开局",
     "undo": "悔棋",
+    "go":"继续",
     "your-color": "走棋方式",
     "black": "先走",
     "white": "后走",
