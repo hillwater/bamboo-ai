@@ -14,15 +14,15 @@
     "less-middleware": "1.0.x",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "amqplib": "",
-    "when": "",
-    "node-uuid": "",
-    "mongodb":"",
-    "socket.io":"",
-    "redis":"",
-    "bluebird":"",
-    "sha1":"",
-    "ejs": "",
-    "i18n":""
+    "amqplib": "0.8.x",
+    "when": "3.7.x",
+    "node-uuid": "1.4.x",
+    "mongodb":"4.1.x",
+    "socket.io":"4.3.x",
+    "redis":"3.1.x",
+    "bluebird":"3.7.x",
+    "sha1":"1.1.x",
+    "ejs": "3.1.x",
+    "i18n":"0.13.x"
   }
 }
