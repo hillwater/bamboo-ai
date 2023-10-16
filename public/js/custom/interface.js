@@ -98,5 +98,5 @@ $(document).ready(function(){
 
 function showWinDialog(game){
     gameInfo.setBlinking(false);
-    alert("finished")
+    gameInfo.setText("Win")
 }

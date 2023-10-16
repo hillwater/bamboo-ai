@@ -59,16 +59,13 @@ function Game(boardElm, boardBackgroundElm){
     };
 
     self.undo = function(){
+        if(!self.history.length) {
+            return;
+        }
+
         if(!playing){
-            do{
-                if(!self.history.length)break;
-                var last = self.history.pop();
-                board.unsetGo(last.r,last.c);
-                white.watch(last.r,last.c,'remove');
-                black.watch(last.r,last.c,'remove');
-            }while((players[last.color] instanceof AIPlayer));
-
-
+            var last = self.history.pop();
+            board.unsetGo(last.r,last.c);
             board.setClickable(true, last.color);
             board.winChangeBack();
             playing=true;
@@ -76,34 +73,29 @@ function Game(boardElm, boardBackgroundElm){
             if(self.history.length > 0) {
                 var last = self.history[self.history.length - 1];
                 board.highlight(last.r, last.c);
-                players[last.color].other.myTurn();
             } else {
                 board.unHighlight();
-                players.black.myTurn();
             }
+
+            self.changeSide();
 
             return;
         }
-        do{
-            if(!self.history.length)break;
-            var last = self.history.pop();
-            board.unsetGo(last.r,last.c);
-            white.watch(last.r,last.c,'remove');
-            black.watch(last.r,last.c,'remove');
-        }while((players[last.color] instanceof AIPlayer));
+        
+        var last = self.history.pop();
+        board.unsetGo(last.r,last.c);
 
         if(self.history.length > 0) {
             var last = self.history[self.history.length - 1];
             board.highlight(last.r, last.c);
-            players[last.color].other.myTurn();
         } else {
             board.unHighlight();
-            players.black.myTurn();
         }
-        for(var col in {'black':'','white':''}){
-            if(players[col] instanceof AIPlayer && players[col].computing){
-                players[col].cancel++;
-            }
+
+        self.changeSide();
+        
+        if(aiPlayer.computing){
+            aiPlayer.cancel++;
         }
     };
 
@@ -122,8 +114,8 @@ function Game(boardElm, boardBackgroundElm){
         self.history = [];
         board.init();
         currentColor = "black";
-        //board.setWarning(0, true);
-        //board.setWarning(1, true);
+        board.setWarning(0, true);
+        board.setWarning(1, true);
     };
 
     self.start = function(){
