@@ -28,6 +28,37 @@ function RedisDao() {
         return client.hgetAsync(utils.posList2Key(posList), utils.combineTypeLevel(type, level));
     };
 
+    this.findMaxLevel = function(posList, minLevel, type) {
+        return client.hgetallAsync(utils.posList2Key(posList)).then(function(levelMap) {
+            if(!levelMap) {
+                return null;
+            }
+
+            var maxLevel = -1;
+            var pos;
+            for(var typeLevel in levelMap) {
+                var obj = utils.extractLevel(typeLevel);
+
+                if(obj.type != type) {
+                    continue;
+                }
+
+                if(maxLevel<obj.level) {
+                    maxLevel = obj.level;
+                    pos = levelMap[typeLevel];
+                }
+            }
+            if(maxLevel == -1 || maxLevel < minLevel) {
+                return null;
+            }
+            
+            return {
+                level: maxLevel,
+                pos: pos
+            };
+        });
+    };
+
     this.insert = function(posList, level, type, value) {
         return client.hsetAsync(utils.posList2Key(posList), utils.combineTypeLevel(type, level), value)
             .then(function(){
