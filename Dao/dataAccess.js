@@ -21,7 +21,8 @@ exports.find = function(posList, level, type) {
         findObliqueAxisSymmetry(posList, level, type),
         findAntiObliqueAxisSymmetry(posList, level, type),
     ]).then(function(dataList){
-        console.log(dataList)
+        console.log("findAll:"+posList+",level:"+level+",type:"+type+",dataList:"+dataList);
+
         let maxLevel = -1;
         let pos;
         dataList.forEach((data) => {

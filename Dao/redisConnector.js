@@ -30,6 +30,7 @@ function RedisDao() {
 
     this.findMaxLevel = function(posList, minLevel, type) {
         return client.hgetallAsync(utils.posList2Key(posList)).then(function(levelMap) {
+            console.log("redis get all,posList:"+posList+",levelMap:"+levelMap)
             if(!levelMap) {
                 return null;
             }
