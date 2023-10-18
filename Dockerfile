@@ -11,8 +11,6 @@ COPY ./routes ./routes
 COPY ./app.js .
 COPY ./package.json .
 
-apt-get install -y vim
-
 RUN npm install --registry=https://registry.npm.taobao.org
 
 EXPOSE 3000
