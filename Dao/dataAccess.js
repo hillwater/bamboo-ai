@@ -6,6 +6,7 @@ var RedisDao = require('./redisConnector');
 var Promise = require("bluebird");
 
 var redisDao = new RedisDao();
+var mask = 0x5a00;
 
 exports.find = function(posList, level, type) {
     // return redisDao.find(posList, level, type);
@@ -50,8 +51,8 @@ exports.find = function(posList, level, type) {
         })
        
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -68,8 +69,8 @@ exports.find = function(posList, level, type) {
         })
        
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -85,8 +86,8 @@ exports.find = function(posList, level, type) {
             newPosList.push(rotate270(pos));
         })
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -102,8 +103,8 @@ exports.find = function(posList, level, type) {
             newPosList.push(horizontalSymmetry(pos));
         })
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -119,8 +120,8 @@ exports.find = function(posList, level, type) {
             newPosList.push(verticalSymmetry(pos));
         })
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -136,8 +137,8 @@ exports.find = function(posList, level, type) {
             newPosList.push(obliqueAxisSymmetry(pos));
         })
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
@@ -153,8 +154,8 @@ exports.find = function(posList, level, type) {
             newPosList.push(antiObliqueAxisSymmetry(pos));
         })
         return redisDao.findMaxLevel(newPosList, level, type).then(function(result) {
-            if(result == null) {
-                return null;
+            if(result == null || result.pos == mask ) {
+                return result;
             } else {
                 return {
                     level: result.level,
