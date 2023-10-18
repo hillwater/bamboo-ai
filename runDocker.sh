@@ -1,4 +1,5 @@
 #!/bin/bash
+. ./buildDocker.sh
 
 docker stop gomoku-web2
 docker rm gomoku-web2
