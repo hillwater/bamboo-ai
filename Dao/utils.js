@@ -33,7 +33,7 @@ exports.combineTypeLevel = function(type, level) {
 exports.extractLevel = function(typeLevel) {
     var array = typeLevel.split(":");
     return {
-        type: array[0],
-        level: array[1]
+        type: parseInt(array[0]),
+        level: parseInt(array[1])
     }
 };
