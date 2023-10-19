@@ -37,7 +37,8 @@ exports.find = function(posList, level, type) {
         if(maxLevel == -1){
             return null;
         } else {
-            return pos;
+            // redis returns string, need to change to number
+            return parseInt(pos);
         }
     });
 
