@@ -76,7 +76,7 @@ function RedisDao() {
 
     this.clearAllMask = function() {
         return client.keysAsync("*").then(async allKeys=>{
-            console.log("clearAllMask, size:"+allKeys.length);
+            console.log("keys:"+allKeys.length);
 
             for(let i =0;i<allKeys.length;i++) {
                 let key = allKeys[i];
@@ -84,7 +84,6 @@ function RedisDao() {
                 if(!levelMap) {
                     continue;
                 }
-                // console.log("check mask, posList:"+utils.key2PosList(key)+",levelMap:"+JSON.stringify(levelMap));
 
                 for(let levelType in levelMap) {
                     if(levelMap[levelType] == mask) {
