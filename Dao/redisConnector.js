@@ -84,7 +84,7 @@ function RedisDao() {
                 if(!levelMap) {
                     continue;
                 }
-                console.log("check mask, posList:"+utils.key2PosList(key)+",levelMap:"+JSON.stringify(levelMap));
+                // console.log("check mask, posList:"+utils.key2PosList(key)+",levelMap:"+JSON.stringify(levelMap));
 
                 for(let levelType in levelMap) {
                     if(levelMap[levelType] == mask) {
