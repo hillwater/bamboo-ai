@@ -75,12 +75,12 @@ function RedisDao() {
     };
 
     this.clearAllMask = function() {
-        return client.keysAsync("*").then(allKeys=>{
+        return client.keysAsync("*").then(async allKeys=>{
             console.log("clearAllMask, size:"+allKeys.length);
 
             for(let i =0;i<allKeys.length;i++) {
                 let key = allKeys[i];
-                let levelMap = client.hgetall(key);
+                let levelMap = await client.hgetallAsync(key);
                 if(!levelMap) {
                     continue;
                 }
