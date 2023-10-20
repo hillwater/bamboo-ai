@@ -75,7 +75,7 @@ function RedisDao() {
     };
 
     this.clearAllMask = function() {
-        return client.keysAsync().then(allKeys=>{
+        return client.keysAsync("*").then(allKeys=>{
             console.log("clearAllMask, size:"+allKeys.size());
 
             for(let i =0;i<allKeys.length;i++) {
