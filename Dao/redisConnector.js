@@ -89,7 +89,7 @@ function RedisDao() {
                 for(let levelType in levelMap) {
                     if(levelMap[levelType] == mask) {
                         // need to clear
-                        client.hrem(key, levelType);
+                        client.hdel(key, levelType);
                         console.log("clear mask, posList:"+utils.key2PosList(key)+",levelType:"+levelType+",levelMap:"+JSON.stringify(levelMap));
                     }
                 }
