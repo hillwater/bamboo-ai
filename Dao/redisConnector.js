@@ -13,6 +13,8 @@ var port = process.env.REDIS_PORT || 6379;
 var host = process.env.REDIS_HOST || 'localhost';
 var password = process.env.REDIS_PASSWORD || '';
 
+var mask = 0x5a00;
+
 // for debug
 //redis.debug_mode = true;
 
@@ -71,6 +73,28 @@ function RedisDao() {
                 return true;
             });
     };
+
+    this.clearAllMask = function() {
+        return client.keysAsync().then(allKeys=>{
+            console.log("clearAllMask, size:"+allKeys.size());
+
+            for(let i =0;i<allKeys.length;i++) {
+                let key = allKeys[i];
+                let levelMap = client.hgetall(key);
+                if(!levelMap) {
+                    continue;
+                }
+
+                for(let levelType in levelMap) {
+                    if(levelMap[levelType] == mask) {
+                        // need to clear
+                        client.hrem(key, levelType);
+                        console.log("clear mask, posList:"+utils.key2PosList(key)+",levelType:"+levelType+",levelMap:"+JSON.stringify(levelMap));
+                    }
+                }
+            }
+        });
+    }
 }
 
 module.exports = RedisDao;
