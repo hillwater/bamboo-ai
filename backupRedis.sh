@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# clear mask record
+node /root/workspace/bamboo-ai/clearRedisMaskRecord.js
+
+
 # copy from redis container to host
 docker cp redis:/data/dump.rdb /tmp/
 
