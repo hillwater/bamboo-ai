@@ -2,7 +2,7 @@
 
 
 # clear mask record
-node /root/workspace/bamboo-ai/clearRedisMaskRecord.js
+#node /root/workspace/bamboo-ai/clearRedisMaskRecord.js
 
 
 # copy from redis container to host
