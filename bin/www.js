@@ -32,15 +32,6 @@ server.on('listening', onListening);
 
 
 /**
- * create socket.io
- */
-var io = require('socket.io')(server);
-
-var WebsocketConnector = require('../Dao/websocketConnector');
-
-var websocketConnector = new WebsocketConnector(io);
-
-/**
  * Normalize a port into a number, string, or false.
  */
 
