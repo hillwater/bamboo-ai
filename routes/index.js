@@ -19,9 +19,6 @@ router.post('/compute', function(req, res, next) {
   var posList = convertStringArrayToIntArray(req.body['posList[]']);
   var level = parseInt(req.body.level);
   var type = parseInt(req.body.type);
-  var useMultiCore = false;
-  var useMultiMachine = false;
-  var machineCount = 0;
 
   dataAccess.find(posList, level, type).then(function(data){
     if(data == null) {
@@ -32,9 +29,6 @@ router.post('/compute', function(req, res, next) {
       var msg = {
         posList:posList,
         level:level,
-        useMultiCore:useMultiCore,
-        useMultiMachine:useMultiMachine,
-        machineCount:machineCount,
         type:type
       };
 
