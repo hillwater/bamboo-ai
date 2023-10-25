@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var amqpConnector = require('../Dao/amqpConnector');
 var dataAccess = require('../Dao/dataAccess');
 var Promise = require("bluebird");
 
@@ -17,7 +16,6 @@ router.get('/custom', function(req, res, next) {
 });
 
 router.post('/compute', function(req, res, next) {
-
   var posList = convertStringArrayToIntArray(req.body['posList[]']);
   var level = parseInt(req.body.level);
   var type = parseInt(req.body.type);
@@ -40,7 +38,7 @@ router.post('/compute', function(req, res, next) {
         type:type
       };
 
-      amqpConnector.publish(new Buffer(JSON.stringify(msg)));
+      dataAccess.addToList("requestQueue", msg);
 
       return mask;
     }else {

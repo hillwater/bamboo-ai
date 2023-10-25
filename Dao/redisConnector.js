@@ -102,6 +102,21 @@ function RedisDao() {
             }
         });
     }
+
+    this.addToList = function(listKey, msg) {
+        return client.rpushAsync(listKey, JSON.stringify(msg))
+            .then(function(){
+                console.log("success to add redis list: %s, value: %s",listKey, JSON.stringify(msg));
+                return true;
+            });
+    }
+
+    this.pull = function(listKey) {
+        return client.blpopAsync(listKey, 0).then((data) => {
+            // data[0] is listKey, data[1] is value
+            return JSON.parse(data[1]);
+        });
+    }
 }
 
 module.exports = RedisDao;

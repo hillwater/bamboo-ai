@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=hillwater/gomoku-web:1.1.0
+IMAGE=hillwater/gomoku-web:3.0.0
 
 docker build -t $IMAGE .
 

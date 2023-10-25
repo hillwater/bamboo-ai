@@ -211,3 +211,11 @@ exports.find = function(posList, level, type) {
 exports.insert = function(posList, level, type, value) {
     return Promise.all([redisDao.insert(posList, level, type, value)]);
 };
+
+exports.addToList = function(listKey, msg) {
+    return redisDao.addToList(listKey, msg);
+}
+
+exports.pull = function(listKey) {
+    return redisDao.pull(listKey);
+}
