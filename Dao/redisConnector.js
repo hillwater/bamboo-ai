@@ -80,7 +80,14 @@ function RedisDao() {
 
             for(let i =0;i<allKeys.length;i++) {
                 let key = allKeys[i];
-                let levelMap = await client.hgetallAsync(key);
+                let levelMap = null;
+                
+                try {
+                    levelMap = await client.hgetallAsync(key);
+                } catch(err) {
+                    // ignore
+                }
+
                 if(!levelMap) {
                     continue;
                 }
